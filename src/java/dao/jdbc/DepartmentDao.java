@@ -1,7 +1,12 @@
 package dao.jdbc;
 
-/**
- * Created by ionex on 3/4/17.
- */
-public class DepartmentDao {
+import dao.DepartmentRepository;
+import java.sql.ResultSet;
+
+public class DepartmentDao extends BaseDao implements DepartmentRepository {
+
+    @Override
+    public ResultSet findAll() {
+        return null;
+    }
 }

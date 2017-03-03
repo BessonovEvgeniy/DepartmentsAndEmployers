@@ -4,4 +4,24 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>Department</servlet-name>
+    <servlet-class>controller.Departments</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>controller.Home</servlet-class>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>Department</servlet-name>
+    <url-pattern>/departments</url-pattern>
+  </servlet-mapping>
 </web-app>
