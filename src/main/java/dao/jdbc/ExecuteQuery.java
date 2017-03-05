@@ -33,6 +33,8 @@ public class ExecuteQuery {
 
         statement = connection.createStatement();
 
+//        connection.close();
+
         return statement.executeQuery(sql);
 
     }

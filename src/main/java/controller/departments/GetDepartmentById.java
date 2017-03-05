@@ -1,4 +1,4 @@
-package controller;
+package controller.departments;
 
 import model.Department;
 import service.DepartmentService;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.InputMismatchException;
+import java.util.Map;
 
-@WebServlet("/departments")
-public class Departments extends HttpServlet {
+@WebServlet("/departments/edit")
+public class GetDepartmentById extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("POST");
@@ -26,11 +26,18 @@ public class Departments extends HttpServlet {
         DepartmentService departmentService = new DepartmentServiceImpl();
 
         try {
-            List<Department> departmentList = departmentService.getAll();
+
+            Integer id = Integer.parseInt(request.getParameter("id"));
+
+            Department department = departmentService.getById(id);
+
+            request.setAttribute("department",department);
+
+            request.getRequestDispatcher("/WEB-INF/pages/departments/edit.jsp").forward(request,response);
         }
         catch (Exception e){
-        }
 
-        request.getRequestDispatcher("/WEB-INF/pages/departments/departments.jsp").forward(request,response);
+        }
     }
 }
+

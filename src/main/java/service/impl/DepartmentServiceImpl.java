@@ -5,7 +5,6 @@ import dao.DepartmentRepository;
 import dao.jdbc.DepartmentDao;
 import model.BaseModel;
 import model.Department;
-import service.BaseService;
 import service.DepartmentService;
 
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
         dao = new DepartmentDao();
     }
 
-    public List<Department> getAll() throws SQLException, ClassNotFoundException {
+    public List<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         List<Department> departmentList = new LinkedList<>();
 
@@ -35,6 +34,22 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
 
         return departmentList;
     }
+
+    public Department getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        Department department = new Department();
+
+        ResultSet resultSet = dao.findById(id);
+
+        if(resultSet.next()) {
+
+            department = createDepartment(resultSet);
+
+        }
+
+        return department;
+    }
+
 
     public Department createDepartment(ResultSet resultSet) throws SQLException{
 

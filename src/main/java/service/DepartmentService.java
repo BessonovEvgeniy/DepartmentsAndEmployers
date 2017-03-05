@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface DepartmentService {
 
-    List<Department> getAll() throws SQLException, ClassNotFoundException;
+    List<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
+    Department getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }
