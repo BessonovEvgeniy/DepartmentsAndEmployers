@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%--
   Created by IntelliJ IDEA.
   User: ionex
@@ -31,22 +31,22 @@
     </tfoot>
 
     <tbody>
-    <c:forEach var="department" items="${departments}">
-        <tr>
-            <td>
-                ${department.name}
-            </td>
-            <td>
-                <a href="/employers/info?depId=${department.id}">View employers</a>
-            </td>
-            <td>
-                <a href="/departmens/edit?depId=${department.id}">Edit</a>
-            </td>
-            <td>
-                <a href="/departmens/delete?depId=${department.id}">Delete</a>
-            </td>
-        </tr>
-    </c:forEach>
+    <%--<c:forEach var="department" items="${departments}">--%>
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--${department.name}--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<a href="/employers/info?depId=${department.id}">View employers</a>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<a href="/departmens/edit?depId=${department.id}">Edit</a>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<a href="/departmens/delete?depId=${department.id}">Delete</a>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+    <%--</c:forEach>--%>
     </tbody>
 </table>
 </div>

@@ -1,6 +1,8 @@
 package model;
 
-public class Department extends BaseModel{
+import lombok.Data;
+
+public @Data class Department extends BaseModel{
 
     String name;
 }
