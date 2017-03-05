@@ -50,8 +50,13 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
         return department;
     }
 
+    public void save(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
-    public Department createDepartment(ResultSet resultSet) throws SQLException{
+        dao.save(department);
+
+    }
+
+    private Department createDepartment(ResultSet resultSet) throws SQLException{
 
         Department department = new Department();
 

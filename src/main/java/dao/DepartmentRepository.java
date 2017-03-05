@@ -11,4 +11,5 @@ public interface DepartmentRepository extends BaseRepository <Department> {
 
     ResultSet findById(Integer id) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 
+    void save(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 }

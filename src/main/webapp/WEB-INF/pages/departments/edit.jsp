@@ -16,7 +16,8 @@
                     <label>Department Name:</label>
                 </div>
                 <div class="col-sm-6">
-                    <input type="text" name="depName">
+                    <input type="text" name="name" value="${department.name}">
+                    <input type="hidden" name="id" value="${department.id}">
                 </div>
             </div>
             <div class="row padding-bot">

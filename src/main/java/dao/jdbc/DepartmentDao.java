@@ -1,6 +1,8 @@
 package dao.jdbc;
 
 import dao.DepartmentRepository;
+import model.Department;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -20,4 +22,18 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
         return executeQuery.createQuery(query);
     }
 
+
+    public void save(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
+
+        Integer id = department.getId();
+
+        String name = department.getName();
+
+        String query = "INSERT INTO departments (id, name) VALUES (" + id + ", \'" + name +"\') " +
+                            "ON CONFLICT (id) DO UPDATE SET name = \'" + name + "\' RETURNING *";
+
+        executeQuery.createQuery(query);
+
+        return;
+    }
 }

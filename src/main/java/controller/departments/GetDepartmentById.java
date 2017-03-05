@@ -16,10 +16,6 @@ import java.util.Map;
 @WebServlet("/departments/edit")
 public class GetDepartmentById extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("POST");
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

@@ -10,4 +10,6 @@ public interface DepartmentService {
     List<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     Department getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+
+    void save(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }
