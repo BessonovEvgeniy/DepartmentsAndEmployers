@@ -67,6 +67,11 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
         dao.save(department);
     }
 
+    public boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+
+        return dao.isNameUnique(name);
+    }
+
     private Department createDepartment(ResultSet resultSet) throws SQLException{
 
         Department department = new Department();
@@ -77,7 +82,7 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
         return department;
     }
 
-    public Map<String, String> validate(Department department){
+    public Map<String, String> validate(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
         Map<String, String> errors = new LinkedHashMap<>();
 
@@ -85,15 +90,20 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
 
             errors.put("Department","Null Value");
 
+            return errors;
+
         }
-        else {
-            pattern = Pattern.compile(DEP_NAME_PATTERN);
+        pattern = Pattern.compile(DEP_NAME_PATTERN);
 
-            matcher = pattern.matcher(department.getName());
+        matcher = pattern.matcher(department.getName());
 
-            if (!matcher.matches()) {
-                errors.put("name", "Department name must have from 3 to 30 chars. Allowed chars is: _,A-Z,a-z,0-9,-");
-            }
+        if (!matcher.matches()) {
+
+            errors.put("name", "Department name must have from 3 to 30 chars. Allowed chars is: _,A-Z,a-z,0-9,-");
+        }
+        else if (dao.isNameUnique(department.getName())){
+
+            errors.put("name", "Department name must be unique. The " + department.getName() + " is already exists.");
         }
 
         return errors;
