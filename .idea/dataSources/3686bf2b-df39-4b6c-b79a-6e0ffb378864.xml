@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="dep_emp_db@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.0">
+    <root id="1"/>
+    <database id="2" parent="1" name="dep_emp_db">
+      <ObjectId>26837</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <schema id="3" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2017-03-06.02:15:21.356</IntrospectionTimestamp>
+      <IntrospectionStateNumber>10652</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="4" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="5" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="6" parent="2" name="pg_temp_1">
+      <ObjectId>11816</ObjectId>
+    </schema>
+    <schema id="7" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11817</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="information_schema">
+      <ObjectId>12123</ObjectId>
+    </schema>
+    <sequence id="9" parent="3" name="departments_id_seq">
+      <ObjectId>26908</ObjectId>
+      <StateNumber>10651</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <sequence id="10" parent="3" name="employers_id_seq">
+      <ObjectId>26918</ObjectId>
+      <StateNumber>10652</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <table id="11" parent="3" name="departments">
+      <ObjectId>26910</ObjectId>
+      <StateNumber>10652</StateNumber>
+    </table>
+    <table id="12" parent="3" name="employers">
+      <ObjectId>26920</ObjectId>
+      <StateNumber>10652</StateNumber>
+    </table>
+    <column id="13" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>10651</StateNumber>
+      <DefaultExpression>nextval(&apos;departments_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="14" parent="11" name="name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>10651</StateNumber>
+    </column>
+    <index id="15" parent="11" name="departments_pkey">
+      <ObjectId>26914</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="16" parent="11" name="departments_name_key">
+      <ObjectId>26916</ObjectId>
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="17" parent="11" name="departments_pkey">
+      <ObjectId>26915</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>departments_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="18" parent="11" name="departments_name_key">
+      <ObjectId>26917</ObjectId>
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>departments_name_key</UnderlyingIndexName>
+    </key>
+    <column id="19" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>10652</StateNumber>
+      <DefaultExpression>nextval(&apos;employers_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="20" parent="12" name="department_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>10652</StateNumber>
+    </column>
+    <column id="21" parent="12" name="name">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+      <StateNumber>10652</StateNumber>
+    </column>
+    <column id="22" parent="12" name="email">
+      <Position>4</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>10652</StateNumber>
+    </column>
+    <column id="23" parent="12" name="birthday">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>10652</StateNumber>
+    </column>
+    <column id="24" parent="12" name="phone">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>10652</StateNumber>
+    </column>
+    <index id="25" parent="12" name="employers_pkey">
+      <ObjectId>26924</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="26" parent="12" name="employers_email_key">
+      <ObjectId>26926</ObjectId>
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="27" parent="12" name="employers_pkey">
+      <ObjectId>26925</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>employers_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="28" parent="12" name="employers_email_key">
+      <ObjectId>26927</ObjectId>
+      <ColNames>email</ColNames>
+      <UnderlyingIndexName>employers_email_key</UnderlyingIndexName>
+    </key>
+    <foreign-key id="29" parent="12" name="employers_department_id_fkey">
+      <ObjectId>26928</ObjectId>
+      <ColNames>department_id</ColNames>
+      <RefTableName>departments</RefTableName>
+      <RefKeyName>departments_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
