@@ -1,5 +1,6 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -40,15 +41,15 @@
         </div>
         <div class="col-sm-1"></div>
         <div class="col-sm-4">
-            <label>Phone:</label>
+            <label>Rank:</label>
         </div>
         <div class="col-sm-6">
             <c:choose>
-                <c:when test="${not empty employer.phone}">
-                    <input type="text" name="phone" value="${employer.phone}">
+                <c:when test="${not empty employer.rank}">
+                    <input type="text" name="rank" value="${employer.rank}">
                 </c:when>
                 <c:otherwise>
-                    <input type="text" name="phone" value="">
+                    <input type="text" name="rank" value="">
                 </c:otherwise>
             </c:choose>
         </div>

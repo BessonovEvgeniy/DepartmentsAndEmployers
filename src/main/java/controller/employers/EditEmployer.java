@@ -24,22 +24,28 @@ public class EditEmployer extends HttpServlet {
 
             String idStr = request.getParameter("id");
 
-            if (idStr == null || idStr.isEmpty()){
+            if (idStr == null || idStr.isEmpty()) {
 
                 employer = new Employer();
+                
+                String depIdStr = request.getParameter("depId");
 
-                request.setAttribute("employer",employer);
+                employer.setDepId(employerService.getIntFromString(depIdStr));
 
-                request.getRequestDispatcher("/WEB-INF/pages/employers/edit.jsp").forward(request,response);
+                request.setAttribute("employer", employer);
+
+                request.getRequestDispatcher("/WEB-INF/pages/employers/edit.jsp").forward(request, response);
             }
+            else {
 
-            Integer id = Integer.parseInt(request.getParameter("id"));
+                Integer id = Integer.parseInt(request.getParameter("id"));
 
-            employer = employerService.getById(id);
+                employer = employerService.getById(id);
 
-            request.setAttribute("employer",employer);
+                request.setAttribute("employer", employer);
 
-            request.getRequestDispatcher("/WEB-INF/pages/employers/edit.jsp").forward(request,response);
+                request.getRequestDispatcher("/WEB-INF/pages/employers/edit.jsp").forward(request, response);
+            }
         }
         catch (Exception e){
             e.printStackTrace();

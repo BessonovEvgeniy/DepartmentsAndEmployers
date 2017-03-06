@@ -12,6 +12,6 @@ public interface EmployerRepository extends BaseRepository <Employer> {
     ResultSet findById(Integer id) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 
     void upsert(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
-//
-//    boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
+
+    boolean isEmailExists(String email, Integer currentUserId) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 }

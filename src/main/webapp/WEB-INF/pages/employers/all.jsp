@@ -39,7 +39,7 @@
     </c:forEach>
     </tbody>
 </table>
-<a href="/employers/edit">Add Employer</a>
+<a href="/employer/edit?depId=${depId}">Add Employer</a>
 </div>
 </body>
 </html>

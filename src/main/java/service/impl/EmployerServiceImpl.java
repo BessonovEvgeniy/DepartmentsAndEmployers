@@ -8,12 +8,15 @@ import service.EmployerService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EmployerServiceImpl<T extends BaseModel> extends BaseServiceImpl<Employer , EmployerRepository> implements EmployerService {
+public class EmployerServiceImpl extends BaseServiceImpl implements EmployerService {
 
     protected EmployerRepository dao;
     private Pattern pattern;
@@ -62,6 +65,38 @@ public class EmployerServiceImpl<T extends BaseModel> extends BaseServiceImpl<Em
         dao.upsert(employer);
     }
 
+    public Map<String,String> validate(Employer employer){
+
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        if (employer == null){
+
+            errors.put("Employer","Null Value");
+
+            return errors;
+
+        }
+        if (employer.getRank() == null || employer.getRank() <=0 || employer.getRank() > 5){
+
+            errors.put("Wrong Rank","Enter employer Rank from 1 to 5");
+
+            return errors;
+        }
+        if (employer.getEmail() == null || employer.getEmail().isEmpty()) {
+            errors.put("Empty email","Enter employer email");
+        }
+
+        pattern = Pattern.compile(EMAIL_PATTERN);
+
+        matcher = pattern.matcher(employer.getEmail());
+
+        if (!matcher.matches()){
+            errors.put("Email is incorrect","Enter correct email");
+        }
+
+        return errors;
+    }
+
     private Employer createEmployer(ResultSet resultSet) throws SQLException{
 
         Employer employer = new Employer();
@@ -70,7 +105,7 @@ public class EmployerServiceImpl<T extends BaseModel> extends BaseServiceImpl<Em
         employer.setName(resultSet.getString("name"));
         employer.setEmail(resultSet.getString("email"));
         employer.setBirthday(resultSet.getDate("birthday"));
-        employer.setPhone(resultSet.getInt("phone"));
+        employer.setRank(resultSet.getInt("rank"));
         employer.setDepId(resultSet.getInt("department_id"));
 
         return employer;

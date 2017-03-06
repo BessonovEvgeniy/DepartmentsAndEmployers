@@ -29,13 +29,16 @@ public class AllEmployers extends HttpServlet {
 
                 List<Employer> employerList = employerService.getAllByDepId(depId);
 
+                request.setAttribute("depId",depId);
+
                 request.setAttribute("employers",employerList);
 
                 request.getRequestDispatcher("/WEB-INF/pages/employers/all.jsp").forward(request,response);
 
             }
-
-            response.sendRedirect("/departments");
+            else {
+                response.sendRedirect("/departments");
+            }
 
         }
         catch (Exception e){

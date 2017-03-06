@@ -1,11 +1,13 @@
 package service;
 
+import model.BaseModel;
 import model.Employer;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
-public interface EmployerService {
+public interface EmployerService extends BaseService{
 
     List<Employer> getAllByDepId(Integer depId) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
@@ -13,4 +15,5 @@ public interface EmployerService {
 
     void upsert(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
+    Map<String,String> validate(Employer employer);
 }

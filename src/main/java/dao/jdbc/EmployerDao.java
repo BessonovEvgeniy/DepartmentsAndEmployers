@@ -38,16 +38,16 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
 
         java.sql.Date sqlDate = new java.sql.Date(birthday.getTime());
 
-        Integer phone = employer.getPhone();
+        Integer rank = employer.getRank();
 
         String query;
 
         if (id == null) {
-            query = "INSERT INTO employers (department_id, name, email, birthday, phone) " +
+            query = "INSERT INTO employers (department_id, name, email, birthday, rank) " +
                     "VALUES (?, ?, ?, ?, ?)";
         }
         else {
-            query = "UPDATE employers SET (department_id, name, email, birthday, phone)" +
+            query = "UPDATE employers SET (department_id, name, email, birthday, rank)" +
                     " = (?, ?, ?, ?, ?) WHERE id=?";
         }
 
@@ -57,7 +57,7 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
         preparedStatement.setString(2,name);
         preparedStatement.setString(3,email);
         preparedStatement.setDate(4,sqlDate);
-        preparedStatement.setInt(5,phone);
+        preparedStatement.setInt(5,rank);
 
         if (id != null){
             preparedStatement.setInt(6,id);
@@ -66,18 +66,23 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
         preparedStatement.executeUpdate();
         return;
     }
-//
-//    public boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
-//
-//        String query = "SELECT * FROM departments WHERE name=\'" + name + "\' LIMIT 1";
-//
-//        ResultSet resultSet = executeQuery.createQuery(query);
-//
-//        if (resultSet.next()) {
-//            return true;
-//        }
-//
-//        return false;
-//    }
+
+    public boolean isEmailExists(String email, Integer currentUserId) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
+
+        String query = "SELECT * FROM employers WHERE email=? AND id!=? LIMIT 1";
+
+        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+
+        preparedStatement.setString(1,email);
+        preparedStatement.setInt(2,currentUserId);
+
+        ResultSet resultSet = executeQuery.createQuery(query);
+
+        if (resultSet.next()) {
+            return true;
+        }
+
+        return false;
+    }
 
 }

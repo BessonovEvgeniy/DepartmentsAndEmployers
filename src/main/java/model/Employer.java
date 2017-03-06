@@ -12,7 +12,7 @@ public @Data class Employer extends BaseModel{
 
     private Date birthday;
 
-    private Integer phone;
+    private Integer rank;
 
     private Integer depId;
 }
