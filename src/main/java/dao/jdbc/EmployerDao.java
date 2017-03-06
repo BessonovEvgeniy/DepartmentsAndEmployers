@@ -67,16 +67,24 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
         return;
     }
 
-    public boolean isEmailExists(String email, Integer currentUserId) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
+    public boolean isEmailExists(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        String query = "SELECT * FROM employers WHERE email=? AND id!=? LIMIT 1";
+        PreparedStatement preparedStatement;
+        if (employer.getId() == null){
+            String query = "SELECT * FROM employers WHERE email=? LIMIT 1";
+            preparedStatement = executeQuery.getPrepearedStatment(query);
+            preparedStatement.setString(1,employer.getEmail());
+        }
+        else {
+//          For current user email check on update profile data
+            String query = "SELECT * FROM employers WHERE email=? AND id!=? LIMIT 1";
+            preparedStatement = executeQuery.getPrepearedStatment(query);
+            preparedStatement.setString(1,employer.getEmail());
+            preparedStatement.setInt(2,employer.getId());
+        }
 
-        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
 
-        preparedStatement.setString(1,email);
-        preparedStatement.setInt(2,currentUserId);
-
-        ResultSet resultSet = executeQuery.createQuery(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
             return true;

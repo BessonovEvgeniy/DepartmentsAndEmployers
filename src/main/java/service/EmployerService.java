@@ -15,5 +15,5 @@ public interface EmployerService extends BaseService{
 
     void upsert(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
-    Map<String,String> validate(Employer employer);
+    Map<String,String> validate(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }

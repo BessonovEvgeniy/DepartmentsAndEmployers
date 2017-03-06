@@ -65,7 +65,7 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
         dao.upsert(employer);
     }
 
-    public Map<String,String> validate(Employer employer){
+    public Map<String,String> validate(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
         Map<String, String> errors = new LinkedHashMap<>();
 
@@ -92,6 +92,9 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
 
         if (!matcher.matches()){
             errors.put("Email is incorrect","Enter correct email");
+        }
+        if (dao.isEmailExists(employer)) {
+            errors.put("Email is exists","This email is already registered. Try another.");
         }
 
         return errors;
