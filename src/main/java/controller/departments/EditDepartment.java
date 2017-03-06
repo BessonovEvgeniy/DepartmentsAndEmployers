@@ -42,7 +42,7 @@ public class EditDepartment extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/pages/departments/edit.jsp").forward(request,response);
         }
         catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }

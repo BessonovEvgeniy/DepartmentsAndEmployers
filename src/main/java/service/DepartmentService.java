@@ -14,5 +14,5 @@ public interface DepartmentService {
 
     void save(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
-    public Map<String, String> validate(Department department);
+    Map<String, String> validate(Department department)  throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }

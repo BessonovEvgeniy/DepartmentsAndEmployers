@@ -28,7 +28,7 @@ public class AllDepartments extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/pages/departments/all.jsp").forward(request,response);
         }
         catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }
