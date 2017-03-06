@@ -34,6 +34,9 @@
                     </c:choose>
                 </div>
             </div>
+            <c:forEach var="error" items="${errors}">
+                <label style="color: red">${error.value}</label>
+            </c:forEach>
             <div class="row padding-bot">
                 <div class="col-sm-4 col-sm-offset-4">
                     <c:choose >

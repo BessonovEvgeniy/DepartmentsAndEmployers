@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet("/departments/save")
 public class UpsertDepartment extends HttpServlet {
@@ -19,29 +20,34 @@ public class UpsertDepartment extends HttpServlet {
 
         DepartmentService departmentService = new DepartmentServiceImpl();
 
+        Department department = new Department();
+
         String idStr = request.getParameter("id");
 
         String name = request.getParameter("name");
 
-        Department department;
-
         try {
-            if (idStr == null || idStr.isEmpty()) {
+            if (idStr != null && !idStr.isEmpty()) {
 
-                department = new Department();
-
-                department.setName(name);
-
-                departmentService.save(department);
-
-                response.sendRedirect("/departments");
-
-            } else {
                 Integer id = Integer.parseInt(idStr);
 
                 department = departmentService.getById(id);
 
-                department.setName(name);
+            }
+            department.setName(name);
+
+            Map<String,String> errors = departmentService.validate(department);
+
+            if (!errors.isEmpty()){
+
+                request.setAttribute("errors",errors);
+
+                request.setAttribute("department",department);
+
+                request.getRequestDispatcher("/WEB-INF/pages/departments/edit.jsp").forward(request,response);
+
+            }
+            else {
 
                 departmentService.save(department);
 
@@ -49,7 +55,7 @@ public class UpsertDepartment extends HttpServlet {
             }
         }
         catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }

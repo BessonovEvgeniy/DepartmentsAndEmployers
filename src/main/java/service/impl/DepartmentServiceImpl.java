@@ -1,6 +1,5 @@
 package service.impl;
 
-import com.sun.org.apache.regexp.internal.RE;
 import dao.DepartmentRepository;
 import dao.jdbc.DepartmentDao;
 import model.BaseModel;
@@ -9,12 +8,25 @@ import service.DepartmentService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<Department , DepartmentRepository> implements DepartmentService{
 
-    DepartmentRepository dao;
+    protected DepartmentRepository dao;
+    private Pattern pattern;
+    private Matcher matcher;
+
+//    private static final String EMAIL_PATTERN =
+//            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+//                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final String DEP_NAME_PATTERN =
+            "^[_A-Za-z0-9-]{3,30}$";
 
     public DepartmentServiceImpl(){
         dao = new DepartmentDao();
@@ -53,7 +65,6 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
     public void save(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
         dao.save(department);
-
     }
 
     private Department createDepartment(ResultSet resultSet) throws SQLException{
@@ -64,6 +75,28 @@ public class DepartmentServiceImpl<T extends BaseModel> extends BaseServiceImpl<
         department.setName(resultSet.getString("name"));
 
         return department;
+    }
+
+    public Map<String, String> validate(Department department){
+
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        if (department == null){
+
+            errors.put("Department","Null Value");
+
+        }
+        else {
+            pattern = Pattern.compile(DEP_NAME_PATTERN);
+
+            matcher = pattern.matcher(department.getName());
+
+            if (!matcher.matches()) {
+                errors.put("name", "Department name must have from 3 to 30 chars. Allowed chars is: _,A-Z,a-z,0-9,-");
+            }
+        }
+
+        return errors;
     }
 }
 
