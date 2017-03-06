@@ -43,6 +43,7 @@
     </c:forEach>
     </tbody>
 </table>
+<a href="/departments/edit">Add Department</a>
 </div>
 </body>
 </html>

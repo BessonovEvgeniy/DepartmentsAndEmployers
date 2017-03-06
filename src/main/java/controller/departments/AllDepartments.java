@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Map;
+import java.util.List;
 
-@WebServlet("/departments/edit")
-public class GetDepartmentById extends HttpServlet {
+@WebServlet("/departments")
+public class AllDepartments extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,14 +21,11 @@ public class GetDepartmentById extends HttpServlet {
         DepartmentService departmentService = new DepartmentServiceImpl();
 
         try {
+            List<Department> departmentList = departmentService.getAll();
 
-            Integer id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("departments",departmentList);
 
-            Department department = departmentService.getById(id);
-
-            request.setAttribute("department",department);
-
-            request.getRequestDispatcher("/WEB-INF/pages/departments/edit.jsp").forward(request,response);
+            request.getRequestDispatcher("/WEB-INF/pages/departments/all.jsp").forward(request,response);
         }
         catch (Exception e){
 

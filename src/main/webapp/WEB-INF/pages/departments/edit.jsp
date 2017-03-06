@@ -16,13 +16,35 @@
                     <label>Department Name:</label>
                 </div>
                 <div class="col-sm-6">
-                    <input type="text" name="name" value="${department.name}">
-                    <input type="hidden" name="id" value="${department.id}">
+                    <c:choose >
+                        <c:when test="${not empty department.name}">
+                            <input type="text" name="name" value="${department.name}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" name="name" value="">
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose >
+                        <c:when test="${not empty department.id}">
+                            <input type="hidden" name="id" value="${department.id}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="hidden" name="id" value="">
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
             <div class="row padding-bot">
                 <div class="col-sm-4 col-sm-offset-4">
-                    <input type="submit" value="Update Department" class="btn btn-success"/>
+                    <c:choose >
+                        <c:when test="${not empty department.name}">
+                            <input type="submit" value="Update Department" class="btn btn-success"/>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="submit" value="Create Department" class="btn btn-success"/>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </div>
         </fieldset>

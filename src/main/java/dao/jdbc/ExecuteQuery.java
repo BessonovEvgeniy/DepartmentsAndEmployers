@@ -33,9 +33,17 @@ public class ExecuteQuery {
 
         statement = connection.createStatement();
 
-//        connection.close();
-
         return statement.executeQuery(sql);
+
+    }
+
+    public int upsertQuery (String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        connection = this.getConnection();
+
+        statement = connection.createStatement();
+
+        return statement.executeUpdate(sql);
 
     }
 

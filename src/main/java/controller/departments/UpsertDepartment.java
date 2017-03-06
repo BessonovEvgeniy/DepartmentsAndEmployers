@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/departments/save")
-public class SaveDepartmentById extends HttpServlet {
+public class UpsertDepartment extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,9 +26,15 @@ public class SaveDepartmentById extends HttpServlet {
         Department department;
 
         try {
-            if (idStr.isEmpty()) {
+            if (idStr == null || idStr.isEmpty()) {
 
                 department = new Department();
+
+                department.setName(name);
+
+                departmentService.save(department);
+
+                response.sendRedirect("/departments");
 
             } else {
                 Integer id = Integer.parseInt(idStr);

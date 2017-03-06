@@ -12,24 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/departments")
-public class GetAllDepartments extends HttpServlet {
+@WebServlet("/departments/add")
+public class AddDepartment extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DepartmentService departmentService = new DepartmentServiceImpl();
-
-        try {
-            List<Department> departmentList = departmentService.getAll();
-
-            request.setAttribute("departments",departmentList);
-
-            request.getRequestDispatcher("/WEB-INF/pages/departments/all.jsp").forward(request,response);
-        }
-        catch (Exception e){
-
-        }
+        response.sendRedirect("/departments/edit");
     }
 }
 
