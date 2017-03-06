@@ -12,8 +12,9 @@ public class ExecuteQuery {
     static final String USER = "postgres";
     static final String PASS = "1";
 
-    Connection connection = null;
-    Statement statement = null;
+    Connection connection;
+    Statement statement;
+    PreparedStatement preparedStatement;
 
     private Connection getConnection() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
@@ -44,6 +45,16 @@ public class ExecuteQuery {
         statement = connection.createStatement();
 
         return statement.executeUpdate(sql);
+
+    }
+
+    public PreparedStatement getPrepearedStatment (String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        connection = this.getConnection();
+
+        preparedStatement = connection.prepareStatement(sql);
+
+        return preparedStatement;
 
     }
 

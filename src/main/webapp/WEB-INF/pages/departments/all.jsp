@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <title>Departments</title>
 </head>
 <body>
@@ -31,7 +32,7 @@
                 <span>${department.name}</span>
             </td>
             <td>
-                <a href="/employers/info?id=${department.id}">View employers</a>
+                <a href="/employers?id=${department.id}">View employers</a>
             </td>
             <td>
                 <a href="/departments/edit?id=${department.id}">Edit</a>

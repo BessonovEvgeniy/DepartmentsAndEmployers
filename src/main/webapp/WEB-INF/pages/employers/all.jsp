@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <title>Employers</title>
 </head>
 <body>
@@ -29,10 +30,10 @@
                 <span>${employer.name}</span>
             </td>
             <td>
-                <a href="/employers/edit?id=${employer.id}">Edit</a>
+                <a href="/employer/edit?id=${employer.id}">Edit</a>
             </td>
             <td>
-                <a href="/employers/delete?id=${employer.id}">Delete</a>
+                <a href="/employer/delete?id=${employer.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/employers/dep")
+@WebServlet("/employers")
 public class AllEmployers extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -21,11 +21,22 @@ public class AllEmployers extends HttpServlet {
         EmployerService employerService = new EmployerServiceImpl();
 
         try {
-            List<Employer> employerList = employerService.getAllByDepId(1);
+            String depIdStr = request.getParameter("id");
 
-            request.setAttribute("employers",employerList);
+            if (!depIdStr.isEmpty()){
 
-            request.getRequestDispatcher("/WEB-INF/pages/employers/all.jsp").forward(request,response);
+                Integer depId = Integer.parseInt(depIdStr);
+
+                List<Employer> employerList = employerService.getAllByDepId(depId);
+
+                request.setAttribute("employers",employerList);
+
+                request.getRequestDispatcher("/WEB-INF/pages/employers/all.jsp").forward(request,response);
+
+            }
+
+            response.sendRedirect("/departments");
+
         }
         catch (Exception e){
             e.printStackTrace();

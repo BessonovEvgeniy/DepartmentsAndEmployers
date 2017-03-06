@@ -42,12 +42,33 @@ public class EmployerServiceImpl<T extends BaseModel> extends BaseServiceImpl<Em
         return employerList;
     }
 
+    public Employer getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        Employer employer = new Employer();
+
+        ResultSet resultSet = dao.findById(id);
+
+        if(resultSet.next()) {
+
+            employer = createEmployer(resultSet);
+
+        }
+
+        return employer;
+    }
+
+    public void upsert(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+
+        dao.upsert(employer);
+    }
+
     private Employer createEmployer(ResultSet resultSet) throws SQLException{
 
         Employer employer = new Employer();
 
         employer.setId(resultSet.getInt("id"));
         employer.setName(resultSet.getString("name"));
+        employer.setEmail(resultSet.getString("email"));
         employer.setBirthday(resultSet.getDate("birthday"));
         employer.setPhone(resultSet.getInt("phone"));
         employer.setDepId(resultSet.getInt("department_id"));
