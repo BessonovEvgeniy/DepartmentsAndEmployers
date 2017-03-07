@@ -3,7 +3,6 @@ package dao.jdbc;
 import dao.EmployerRepository;
 import model.Employer;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.Date;
 
@@ -11,29 +10,41 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
 
     public ResultSet findAllByDepId(Integer depId) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
-        String query = "SELECT * FROM employers WHERE department_id="+depId;
+        try (Connection connection = executeQuery.getConnection()) {
 
-        return executeQuery.createQuery(query);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT * FROM employers WHERE department_id=" + depId;
+
+            return statement.executeQuery(query);
+        }
     }
 
     public ResultSet findById(Integer id) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        String query = "SELECT * FROM employers WHERE id=" + id;
+        try (Connection connection = executeQuery.getConnection()){
 
-        return executeQuery.createQuery(query);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT * FROM employers WHERE id=" + id;
+
+            return statement.executeQuery(query);
+        }
+
     }
 
     public void delete(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        String query = "DELETE FROM employers WHERE id=?";
+        try (Connection connection = executeQuery.getConnection()) {
 
-        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+            String query = "DELETE FROM employers WHERE id="+employer.getId();
 
-        preparedStatement.setInt(1,employer.getId());
+            Statement statement = connection.createStatement();
 
-        preparedStatement.executeUpdate();
+            statement.executeUpdate(query);
 
-        return;
+            return;
+        }
     }
 
     public void upsert(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
@@ -65,7 +76,7 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
 
         try (Connection connection = executeQuery.getConnection()){
 
-            PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setInt(1,depId);
             preparedStatement.setString(2,name);
