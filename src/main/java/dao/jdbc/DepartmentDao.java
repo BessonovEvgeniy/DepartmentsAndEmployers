@@ -3,7 +3,9 @@ package dao.jdbc;
 import com.sun.org.apache.regexp.internal.RE;
 import dao.DepartmentRepository;
 import model.Department;
+import model.Employer;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -40,6 +42,19 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
         }
 
         executeQuery.upsertQuery(query);
+
+        return;
+    }
+
+    public void delete(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
+
+        String query = "DELETE FROM departments WHERE id=?";
+
+        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+
+        preparedStatement.setInt(1,department.getId());
+
+        preparedStatement.executeUpdate();
 
         return;
     }

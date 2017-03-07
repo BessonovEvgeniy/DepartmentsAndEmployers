@@ -13,5 +13,7 @@ public interface DepartmentRepository extends BaseRepository <Department> {
 
     void save(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 
+    void delete(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
+
     boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 }

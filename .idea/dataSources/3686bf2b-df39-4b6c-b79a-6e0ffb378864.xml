@@ -9,8 +9,8 @@
     </database>
     <schema id="3" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2017-03-06.23:14:41.237</IntrospectionTimestamp>
-      <IntrospectionStateNumber>10714</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2017-03-07.12:51:01.096</IntrospectionTimestamp>
+      <IntrospectionStateNumber>10751</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -30,54 +30,54 @@
       <ObjectId>12123</ObjectId>
     </schema>
     <sequence id="9" parent="3" name="departments_id_seq">
-      <ObjectId>26908</ObjectId>
-      <StateNumber>10651</StateNumber>
+      <ObjectId>26949</ObjectId>
+      <StateNumber>10750</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="10" parent="3" name="employers_id_seq">
-      <ObjectId>26934</ObjectId>
-      <StateNumber>10714</StateNumber>
+      <ObjectId>26959</ObjectId>
+      <StateNumber>10751</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <table id="11" parent="3" name="departments">
-      <ObjectId>26910</ObjectId>
-      <StateNumber>10714</StateNumber>
+      <ObjectId>26951</ObjectId>
+      <StateNumber>10751</StateNumber>
     </table>
     <table id="12" parent="3" name="employers">
-      <ObjectId>26936</ObjectId>
-      <StateNumber>10714</StateNumber>
+      <ObjectId>26961</ObjectId>
+      <StateNumber>10751</StateNumber>
     </table>
     <column id="13" parent="11" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>10651</StateNumber>
+      <StateNumber>10750</StateNumber>
       <DefaultExpression>nextval(&apos;departments_id_seq&apos;::regclass)</DefaultExpression>
     </column>
     <column id="14" parent="11" name="name">
       <Position>2</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>10651</StateNumber>
+      <StateNumber>10750</StateNumber>
     </column>
     <index id="15" parent="11" name="departments_pkey">
-      <ObjectId>26914</ObjectId>
+      <ObjectId>26955</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <index id="16" parent="11" name="departments_name_key">
-      <ObjectId>26916</ObjectId>
+      <ObjectId>26957</ObjectId>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="17" parent="11" name="departments_pkey">
-      <ObjectId>26915</ObjectId>
+      <ObjectId>26956</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>departments_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
     <key id="18" parent="11" name="departments_name_key">
-      <ObjectId>26917</ObjectId>
+      <ObjectId>26958</ObjectId>
       <ColNames>name</ColNames>
       <UnderlyingIndexName>departments_name_key</UnderlyingIndexName>
     </key>
@@ -85,58 +85,58 @@
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>10714</StateNumber>
+      <StateNumber>10751</StateNumber>
       <DefaultExpression>nextval(&apos;employers_id_seq&apos;::regclass)</DefaultExpression>
     </column>
     <column id="20" parent="12" name="department_id">
       <Position>2</Position>
       <DataType>integer|0</DataType>
-      <StateNumber>10714</StateNumber>
+      <StateNumber>10751</StateNumber>
     </column>
     <column id="21" parent="12" name="name">
       <Position>3</Position>
       <DataType>varchar(20)|0</DataType>
-      <StateNumber>10714</StateNumber>
+      <StateNumber>10751</StateNumber>
     </column>
     <column id="22" parent="12" name="email">
       <Position>4</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>10714</StateNumber>
+      <StateNumber>10751</StateNumber>
     </column>
     <column id="23" parent="12" name="birthday">
       <Position>5</Position>
       <DataType>date|0</DataType>
-      <StateNumber>10714</StateNumber>
+      <StateNumber>10751</StateNumber>
     </column>
     <column id="24" parent="12" name="rank">
       <Position>6</Position>
       <DataType>integer|0</DataType>
-      <StateNumber>10714</StateNumber>
+      <StateNumber>10751</StateNumber>
     </column>
     <index id="25" parent="12" name="employers_pkey">
-      <ObjectId>26940</ObjectId>
+      <ObjectId>26965</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <index id="26" parent="12" name="employers_email_key">
-      <ObjectId>26942</ObjectId>
+      <ObjectId>26967</ObjectId>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="27" parent="12" name="employers_pkey">
-      <ObjectId>26941</ObjectId>
+      <ObjectId>26966</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>employers_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
     <key id="28" parent="12" name="employers_email_key">
-      <ObjectId>26943</ObjectId>
+      <ObjectId>26968</ObjectId>
       <ColNames>email</ColNames>
       <UnderlyingIndexName>employers_email_key</UnderlyingIndexName>
     </key>
     <foreign-key id="29" parent="12" name="employers_department_id_fkey">
-      <ObjectId>26944</ObjectId>
+      <ObjectId>26969</ObjectId>
       <ColNames>department_id</ColNames>
       <RefTableName>departments</RefTableName>
       <RefKeyName>departments_pkey</RefKeyName>

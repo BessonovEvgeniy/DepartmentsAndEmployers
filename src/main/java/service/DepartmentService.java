@@ -14,5 +14,9 @@ public interface DepartmentService extends BaseService {
 
     void save(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
+    void delete(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+
+    boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+
     Map<String, String> validate(Department department)  throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }

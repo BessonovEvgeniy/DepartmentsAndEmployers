@@ -43,6 +43,7 @@
     </tbody>
 </table>
 <a href="/employer/edit?depId=${depId}">Add Employer</a>
+<a href="/departments">Back to departments</a>
 </div>
 </body>
 </html>

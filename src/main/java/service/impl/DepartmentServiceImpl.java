@@ -61,6 +61,11 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
         dao.save(department);
     }
 
+    public void delete(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+
+        dao.delete(department);
+    }
+
     public boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
         return dao.isNameUnique(name);

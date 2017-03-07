@@ -35,10 +35,10 @@
                 <a href="/employers?id=${department.id}">View employers</a>
             </td>
             <td>
-                <a href="/departments/edit?id=${department.id}">Edit</a>
+                <a href="/department/edit?id=${department.id}">Edit</a>
             </td>
             <td>
-                <a href="/departments/delete?id=${department.id}">Delete</a>
+                <a href="/department/delete?id=${department.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>

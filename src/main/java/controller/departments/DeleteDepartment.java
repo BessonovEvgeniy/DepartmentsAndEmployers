@@ -1,6 +1,7 @@
 package controller.departments;
 
 import model.Department;
+import model.Employer;
 import service.DepartmentService;
 import service.impl.DepartmentServiceImpl;
 
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/department/edit")
-public class EditDepartment extends HttpServlet {
+@WebServlet("/department/delete")
+public class DeleteDepartment extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -20,26 +21,14 @@ public class EditDepartment extends HttpServlet {
         DepartmentService departmentService = new DepartmentServiceImpl();
 
         try {
-            Department department;
-
             String idStr = request.getParameter("id");
 
-            if (idStr == null){
+            Department department = departmentService.getById(departmentService.getIntFromString(idStr));
 
-                department = new Department();
+            departmentService.delete(department);
 
-                request.setAttribute("department",department);
+            response.sendRedirect("/departments");
 
-                request.getRequestDispatcher("/WEB-INF/pages/departments/edit.jsp").forward(request,response);
-            }
-
-            Integer id = departmentService.getIntFromString(idStr);
-
-            department = departmentService.getById(id);
-
-            request.setAttribute("department",department);
-
-            request.getRequestDispatcher("/WEB-INF/pages/departments/edit.jsp").forward(request,response);
         }
         catch (Exception e){
             e.printStackTrace();
