@@ -6,6 +6,8 @@ public @Data class BaseModel {
 
     private Integer id;
 
+    private String name = "";
+
     @Override
     public boolean equals(Object o) {
 

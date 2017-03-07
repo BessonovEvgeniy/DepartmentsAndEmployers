@@ -1,90 +1,97 @@
 package dao.jdbc;
 
-import com.sun.org.apache.regexp.internal.RE;
 import dao.DepartmentRepository;
 import model.Department;
-import model.Employer;
 
-import java.sql.PreparedStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DepartmentDao extends BaseDao implements DepartmentRepository {
 
     public ResultSet findAll() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
-        String query = "SELECT * FROM departments";
+        try (Connection connection = executeQuery.getConnection()) {
 
-        return executeQuery.createQuery(query);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT * FROM departments";
+
+            return statement.executeQuery(query);
+        }
     }
 
     public ResultSet findById(Integer id) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        String query = "SELECT * FROM departments WHERE id=" + id;
+        try (Connection connection = executeQuery.getConnection()) {
 
-        return executeQuery.createQuery(query);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT * FROM departments WHERE id=" + id;
+
+            return statement.executeQuery(query);
+        }
     }
 
     public void save(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        Integer id = department.getId();
+        try (Connection connection = executeQuery.getConnection()) {
 
-        String name = department.getName();
+            Statement statement = connection.createStatement();
 
-        String query;
+            Integer id = department.getId();
 
-        if (id == null) {
-            query = "INSERT INTO departments (name) VALUES ( \'" + name + "\')";
+            String name = department.getName();
+
+            String query;
+
+            if (id == null) {
+                query = "INSERT INTO departments (name) VALUES ( \'" + name + "\')";
+            } else {
+                query = "UPDATE departments SET name = \'" + name + "\'  WHERE id=" + id;
+            }
+
+            statement.executeUpdate(query);
+
+            return;
         }
-        else {
-            query = "UPDATE departments SET name = \'" + name + "\'  WHERE id="+id;
-        }
-
-        executeQuery.upsertQuery(query);
-
-        return;
     }
 
     public void delete(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        String query = "DELETE FROM departments WHERE id=?";
+        try (Connection connection = executeQuery.getConnection()) {
 
-        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+            String query = "DELETE FROM departments WHERE id="+department.getId();
 
-        preparedStatement.setInt(1,department.getId());
+            Statement statement = connection.createStatement();
 
-        preparedStatement.executeUpdate();
+            statement.executeUpdate(query);
 
-        return;
+            return;
+        }
     }
 
     public boolean isNameUnique(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        PreparedStatement preparedStatement;
+        try (Connection connection = executeQuery.getConnection()) {
 
-        if (department.getId() != null) {
+            StringBuilder query = new StringBuilder("SELECT * FROM departments WHERE name=\'" + department.getName()+"\'");
 
-            String query = "SELECT * FROM departments WHERE name=? AND id!=? LIMIT 1";
-            preparedStatement = executeQuery.getPrepearedStatment(query);
+            if (department.getId() != null) {
+                query.append(" AND id!=" + department.getId()+" LIMIT 1");
+            }
 
-            preparedStatement.setString(1,department.getName());
-            preparedStatement.setInt(2,department.getId());
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(query.toString());
+
+            if (resultSet.next()) {
+                return true;
+            }
+
+            return false;
         }
-        else {
-            String query = "SELECT * FROM departments WHERE name=? LIMIT 1";
-            preparedStatement = executeQuery.getPrepearedStatment(query);
-
-            preparedStatement.setString(1,department.getName());
-        }
-
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            return true;
-        }
-
-        return false;
     }
 
 }

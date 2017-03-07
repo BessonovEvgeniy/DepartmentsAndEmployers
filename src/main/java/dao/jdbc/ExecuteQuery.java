@@ -12,10 +12,6 @@ public class ExecuteQuery {
     static final String USER = "postgres";
     static final String PASS = "1";
 
-    private Connection connection;
-    private Statement statement;
-    private PreparedStatement preparedStatement;
-
     public Connection getConnection() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
         Class.forName(JDBC_DRIVER).newInstance();
@@ -27,35 +23,4 @@ public class ExecuteQuery {
 
         return DriverManager.getConnection(DB_URL,connectionsProps);
     }
-
-    public ResultSet createQuery(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-
-        connection = this.getConnection();
-
-        statement = connection.createStatement();
-
-        return statement.executeQuery(sql);
-
-    }
-
-    public int upsertQuery (String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-
-        connection = this.getConnection();
-
-        statement = connection.createStatement();
-
-        return statement.executeUpdate(sql);
-
-    }
-
-    public PreparedStatement getPrepearedStatment (String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-
-        connection = this.getConnection();
-
-        preparedStatement = connection.prepareStatement(sql);
-
-        return preparedStatement;
-
-    }
-
 }

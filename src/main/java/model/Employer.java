@@ -6,8 +6,6 @@ import java.util.Date;
 
 public @Data class Employer extends BaseModel{
 
-    private String name = new String("");
-
     private String email;
 
     private Date birthday;
