@@ -80,7 +80,9 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-6">
             <c:forEach var="error" items="${errors}">
-                <label style="color: red">${error.value}</label>
+                <div class="alert alert-danger">
+                    <strong>Danger!</strong> ${error.value}
+                </div>
             </c:forEach>
         </div>
         <div class="col-sm-1"></div>

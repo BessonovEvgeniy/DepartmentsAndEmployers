@@ -20,6 +20,8 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
     private Pattern pattern;
     private Matcher matcher;
 
+    private static final String USR_NAME_PATTERN = "^[_A-Za-z-\\s]{3,30}$";
+
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -79,11 +81,16 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
             return errors;
 
         }
+
+        pattern = Pattern.compile(USR_NAME_PATTERN);
+
+        matcher = pattern.matcher(employer.getName());
+
+        if (!matcher.matches()){
+            errors.put("Wrong Employer name","Enter correct employer name from 3 to 30 chars. Allowed chars is: _,A-Z,a-z, ,-");
+        }
         if (employer.getRank() == null || employer.getRank() <=0 || employer.getRank() > 5){
-
             errors.put("Wrong Rank","Enter Integer employer Rank from 1 to 5");
-
-            return errors;
         }
         if (employer.getEmail() == null || employer.getEmail().isEmpty()) {
             errors.put("Empty email","Enter employer email");
