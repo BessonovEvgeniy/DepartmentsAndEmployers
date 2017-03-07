@@ -50,7 +50,7 @@ public class UpsertEmployer extends HttpServlet {
             }
             employer.setDepId(employerService.getIntFromString(depIdStr));
 
-            employer.setBirthday(employerService.parseStringToDate(birthdayStr));
+            employer.setBirthday(new java.sql.Date(employerService.parseStringToDate(birthdayStr).getTime()));
 
             employer.setName(name);
 
