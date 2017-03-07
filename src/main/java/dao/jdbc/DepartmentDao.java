@@ -60,12 +60,23 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
 
     public boolean isNameUnique(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        String query = "SELECT * FROM departments WHERE name=? AND id!=? LIMIT 1";
+        PreparedStatement preparedStatement;
 
-        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+        if (department.getId() != null) {
 
-        preparedStatement.setString(1,department.getName());
-        preparedStatement.setInt(2,department.getId());
+            String query = "SELECT * FROM departments WHERE name=? AND id!=? LIMIT 1";
+            preparedStatement = executeQuery.getPrepearedStatment(query);
+
+            preparedStatement.setString(1,department.getName());
+            preparedStatement.setInt(2,department.getId());
+        }
+        else {
+            String query = "SELECT * FROM departments WHERE name=? LIMIT 1";
+            preparedStatement = executeQuery.getPrepearedStatment(query);
+
+            preparedStatement.setString(1,department.getName());
+        }
+
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
