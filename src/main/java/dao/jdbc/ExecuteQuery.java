@@ -16,7 +16,7 @@ public class ExecuteQuery {
     private Statement statement;
     private PreparedStatement preparedStatement;
 
-    private Connection getConnection() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public Connection getConnection() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
         Class.forName(JDBC_DRIVER).newInstance();
 

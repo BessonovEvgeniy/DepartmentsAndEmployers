@@ -3,9 +3,8 @@ package dao.jdbc;
 import dao.EmployerRepository;
 import model.Employer;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.plaf.nimbus.State;
+import java.sql.*;
 import java.util.Date;
 
 public class EmployerDao extends BaseDao implements EmployerRepository {
@@ -64,46 +63,45 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
                     " = (?, ?, ?, ?, ?) WHERE id=?";
         }
 
-        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+        try (Connection connection = executeQuery.getConnection()){
 
-        preparedStatement.setInt(1,depId);
-        preparedStatement.setString(2,name);
-        preparedStatement.setString(3,email);
-        preparedStatement.setDate(4,sqlDate);
-        preparedStatement.setInt(5,rank);
+            PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
 
-        if (id != null){
-            preparedStatement.setInt(6,id);
+            preparedStatement.setInt(1,depId);
+            preparedStatement.setString(2,name);
+            preparedStatement.setString(3,email);
+            preparedStatement.setDate(4,sqlDate);
+            preparedStatement.setInt(5,rank);
+
+            if (id != null){
+                preparedStatement.setInt(6,id);
+            }
+
+            preparedStatement.executeUpdate();
+            return;
         }
-
-        preparedStatement.executeUpdate();
-        return;
     }
 
     public boolean isEmailExists(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        PreparedStatement preparedStatement;
-        if (employer.getId() == null){
-            String query = "SELECT * FROM employers WHERE email=? LIMIT 1";
-            preparedStatement = executeQuery.getPrepearedStatment(query);
-            preparedStatement.setString(1,employer.getEmail());
+        try (Connection connection = executeQuery.getConnection()) {
+
+            StringBuilder query = new StringBuilder("SELECT * FROM employers WHERE email=\'" + employer.getEmail() + "\'");
+
+            if (employer.getId() != null) {
+                query.append(" AND id!=" + employer.getId());
+            }
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(query.toString());
+
+            if (resultSet.next()) {
+                return true;
+            }
+
+            return false;
         }
-        else {
-//          For current user email check on update profile data
-            String query = "SELECT * FROM employers WHERE email=? AND id!=? LIMIT 1";
-            preparedStatement = executeQuery.getPrepearedStatment(query);
-            preparedStatement.setString(1,employer.getEmail());
-            preparedStatement.setInt(2,employer.getId());
-        }
-
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            return true;
-        }
-
-        return false;
     }
 
 }
