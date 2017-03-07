@@ -44,7 +44,7 @@
     </c:forEach>
     </tbody>
 </table>
-<a href="/departments/edit">Add Department</a>
+<a class="btn btn-info" role="button" href="/department/edit">Add Department</a>
 </div>
 </body>
 </html>

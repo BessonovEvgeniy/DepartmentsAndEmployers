@@ -81,7 +81,7 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
         }
         if (employer.getRank() == null || employer.getRank() <=0 || employer.getRank() > 5){
 
-            errors.put("Wrong Rank","Enter employer Rank from 1 to 5");
+            errors.put("Wrong Rank","Enter Integer employer Rank from 1 to 5");
 
             return errors;
         }

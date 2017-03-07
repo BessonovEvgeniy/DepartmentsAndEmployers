@@ -92,6 +92,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
             return errors;
 
         }
+
         pattern = Pattern.compile(DEP_NAME_PATTERN);
 
         matcher = pattern.matcher(department.getName());

@@ -34,6 +34,11 @@ public class UpsertEmployer extends HttpServlet {
 
         String rankStr = request.getParameter("rank");
 
+//      Prevent float values
+        if (!employerService.isInteger(rankStr)){
+            rankStr = "0";
+        }
+
         try {
 
             Integer id = employerService.getIntFromString(idStr);

@@ -8,4 +8,6 @@ public interface BaseService {
     Integer getIntFromString(String idStr) throws ParseException;
 
     Date parseStringToDate(String dateStr) throws ParseException;
+
+    boolean isInteger(String s);
 }

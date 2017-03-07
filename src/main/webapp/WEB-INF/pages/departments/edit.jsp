@@ -48,7 +48,7 @@
                             <input type="submit" value="Create Department" class="btn btn-success"/>
                         </c:otherwise>
                     </c:choose>
-
+                    <a class="btn btn-info" role="button" href="/departments">Back to departments</a>
                 </div>
             </div>
         </fieldset>

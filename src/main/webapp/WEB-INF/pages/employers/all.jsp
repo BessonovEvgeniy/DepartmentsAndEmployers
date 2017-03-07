@@ -42,8 +42,8 @@
     </c:if>
     </tbody>
 </table>
-<a href="/employer/edit?depId=${depId}">Add Employer</a>
-<a href="/departments">Back to departments</a>
+<a class="btn btn-info" role="button" href="/employer/edit?depId=${depId}">Add Employer</a>
+<a class="btn btn-info" role="button" href="/departments">Back to departments</a>
 </div>
 </body>
 </html>
