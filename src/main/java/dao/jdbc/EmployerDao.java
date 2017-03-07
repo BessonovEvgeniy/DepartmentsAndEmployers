@@ -24,6 +24,19 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
         return executeQuery.createQuery(query);
     }
 
+    public void delete(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
+
+        String query = "DELETE FROM employers WHERE id=?";
+
+        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+
+        preparedStatement.setInt(1,employer.getId());
+
+        preparedStatement.executeUpdate();
+
+        return;
+    }
+
     public void upsert(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
         Integer id = employer.getId();

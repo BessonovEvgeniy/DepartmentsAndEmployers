@@ -2,7 +2,6 @@ package service.impl;
 
 import dao.DepartmentRepository;
 import dao.jdbc.DepartmentDao;
-import model.BaseModel;
 import model.Department;
 import service.DepartmentService;
 
@@ -21,8 +20,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
     private Pattern pattern;
     private Matcher matcher;
 
-    private static final String DEP_NAME_PATTERN =
-            "^[_A-Za-z0-9-]{3,30}$";
+    private static final String DEP_NAME_PATTERN = "^[_A-Za-z0-9-\\s]{3,30}$";
 
     public DepartmentServiceImpl(){
         dao = new DepartmentDao();
@@ -95,7 +93,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
 
         if (!matcher.matches()) {
 
-            errors.put("name", "Department name must have from 3 to 30 chars. Allowed chars is: _,A-Z,a-z,0-9,-");
+            errors.put("name", "Department name must have from 3 to 30 chars. Allowed chars is: _,A-Z,a-z,0-9, ,-, ");
         }
         else if (dao.isNameUnique(department.getName())){
 

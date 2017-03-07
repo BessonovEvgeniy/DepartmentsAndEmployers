@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class BaseServiceImpl<T extends BaseModel, P extends BaseRepository<T>>
-        implements BaseService<T> {
+        implements BaseService {
 
     protected P dao;
 

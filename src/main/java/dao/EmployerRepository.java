@@ -13,5 +13,7 @@ public interface EmployerRepository extends BaseRepository <Employer> {
 
     void upsert(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 
+    void delete(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
+
     boolean isEmailExists(Employer employer) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 }

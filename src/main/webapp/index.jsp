@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
-<a href="/departments">Get my money and show departments</a>
+<h2>Hello Dear user!</h2>
+<a href="/departments">Click this to view Departments table</a>
 </body>
 </html>

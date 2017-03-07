@@ -2,13 +2,11 @@ package service.impl;
 
 import dao.EmployerRepository;
 import dao.jdbc.EmployerDao;
-import model.BaseModel;
 import model.Employer;
 import service.EmployerService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -63,6 +61,11 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
     public void upsert(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
         dao.upsert(employer);
+    }
+
+    public void delete(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+
+        dao.delete(employer);
     }
 
     public Map<String,String> validate(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{

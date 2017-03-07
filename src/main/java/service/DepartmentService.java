@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public interface DepartmentService {
+public interface DepartmentService extends BaseService {
 
     List<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
