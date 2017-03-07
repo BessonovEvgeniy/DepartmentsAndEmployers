@@ -37,8 +37,7 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
             query = "INSERT INTO departments (name) VALUES ( \'" + name + "\')";
         }
         else {
-            query = "INSERT INTO departments (id, name) VALUES (" + id + ", \'" + name + "\') " +
-                    "ON CONFLICT (id) DO UPDATE SET name = \'" + name + "\'";
+            query = "UPDATE departments SET name = \'" + name + "\'  WHERE id="+id;
         }
 
         executeQuery.upsertQuery(query);
@@ -59,11 +58,16 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
         return;
     }
 
-    public boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
+    public boolean isNameUnique(Department department) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException{
 
-        String query = "SELECT * FROM departments WHERE name=\'" + name + "\' LIMIT 1";
+        String query = "SELECT * FROM departments WHERE name=? AND id!=? LIMIT 1";
 
-        ResultSet resultSet = executeQuery.createQuery(query);
+        PreparedStatement preparedStatement = executeQuery.getPrepearedStatment(query);
+
+        preparedStatement.setString(1,department.getName());
+        preparedStatement.setInt(2,department.getId());
+
+        ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
             return true;

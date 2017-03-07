@@ -66,9 +66,9 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
         dao.delete(department);
     }
 
-    public boolean isNameUnique(String name) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public boolean isNameUnique(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
-        return dao.isNameUnique(name);
+        return dao.isNameUnique(department);
     }
 
     private Department createDepartment(ResultSet resultSet) throws SQLException{
@@ -101,7 +101,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
 
             errors.put("name", "Department name must have from 3 to 30 chars. Allowed chars is: _,A-Z,a-z,0-9, ,-, ");
         }
-        else if (dao.isNameUnique(department.getName())){
+        else if (dao.isNameUnique(department)){
 
             errors.put("name", "Department name must be unique. The " + department.getName() + " is already exists.");
         }
