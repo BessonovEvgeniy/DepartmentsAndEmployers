@@ -7,7 +7,7 @@
     <title>Departments</title>
 </head>
 <body>
-<table id="table-list" class="table table-striped table-bordered">
+<table class="table table-bordered">
     <thead>
     <tr>
         <th>Department name</th>

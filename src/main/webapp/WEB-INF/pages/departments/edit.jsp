@@ -36,12 +36,15 @@
                 </div>
             </div>
             <c:forEach var="error" items="${errors}">
-                <label style="color: red">${error.value}</label>
+                <div class="alert alert-danger">
+                    <strong>Danger!</strong> ${error.value}
+                </div>
             </c:forEach>
+            <br>
             <div class="row padding-bot">
                 <div class="col-sm-4 col-sm-offset-4">
                     <c:choose >
-                        <c:when test="${not empty department.name}">
+                        <c:when test="${not empty department.id}">
                             <input type="submit" value="Update Department" class="btn btn-success"/>
                         </c:when>
                         <c:otherwise>
