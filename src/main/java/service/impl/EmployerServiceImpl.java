@@ -32,32 +32,12 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
 
     public List<Employer> getAllByDepId(Integer depId) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
-        List<Employer> employerList = new LinkedList<>();
-
-        ResultSet resultSet = dao.findAllByDepId(depId);
-
-        while(resultSet.next()){
-
-            employerList.add(createEmployer(resultSet));
-
-        }
-
-        return employerList;
+        return dao.findAllByDepId(depId);
     }
 
     public Employer getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
-        Employer employer = new Employer();
-
-        ResultSet resultSet = dao.findById(id);
-
-        if(resultSet.next()) {
-
-            employer = createEmployer(resultSet);
-
-        }
-
-        return employer;
+        return dao.findById(id);
     }
 
     public void upsert(Employer employer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -108,20 +88,6 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
         }
 
         return errors;
-    }
-
-    private Employer createEmployer(ResultSet resultSet) throws SQLException{
-
-        Employer employer = new Employer();
-
-        employer.setId(resultSet.getInt("id"));
-        employer.setName(resultSet.getString("name"));
-        employer.setEmail(resultSet.getString("email"));
-        employer.setBirthday(resultSet.getDate("birthday"));
-        employer.setRank(resultSet.getInt("rank"));
-        employer.setDepId(resultSet.getInt("department_id"));
-
-        return employer;
     }
 }
 

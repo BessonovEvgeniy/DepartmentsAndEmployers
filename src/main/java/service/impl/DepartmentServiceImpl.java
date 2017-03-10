@@ -28,32 +28,12 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
 
     public List<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
-        List<Department> departmentList = new LinkedList<>();
-
-        ResultSet resultSet = dao.findAll();
-
-        while(resultSet.next()){
-
-            departmentList.add(createDepartment(resultSet));
-
-        }
-
-        return departmentList;
+        return dao.findAll();
     }
 
     public Department getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
-        Department department = new Department();
-
-        ResultSet resultSet = dao.findById(id);
-
-        if(resultSet.next()) {
-
-            department = createDepartment(resultSet);
-
-        }
-
-        return department;
+        return dao.findById(id);
     }
 
     public void save(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -69,16 +49,6 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
     public boolean isNameUnique(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 
         return dao.isNameUnique(department);
-    }
-
-    private Department createDepartment(ResultSet resultSet) throws SQLException{
-
-        Department department = new Department();
-
-        department.setId(resultSet.getInt("id"));
-        department.setName(resultSet.getString("name"));
-
-        return department;
     }
 
     public Map<String, String> validate(Department department) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
