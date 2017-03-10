@@ -1,33 +1,32 @@
 package controller.departments;
 
+import controller.Controller;
 import model.Department;
 import service.DepartmentService;
 import service.impl.DepartmentServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/departments")
-public class AllDepartments extends HttpServlet {
+public class AllDepartments implements Controller {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private DepartmentService departmentService = new DepartmentServiceImpl();
 
-        DepartmentService departmentService = new DepartmentServiceImpl();
-
+    @Override
+    public void openPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+
             List<Department> departmentList = departmentService.getAll();
 
-            request.setAttribute("departments",departmentList);
+            request.setAttribute("departments", departmentList);
 
-            request.getRequestDispatcher("/WEB-INF/pages/departments/all.jsp").forward(request,response);
+            request.getRequestDispatcher("/WEB-INF/pages/departments/all.jsp").forward(request, response);
         }
         catch (Exception e){
+
             e.printStackTrace();
         }
     }
