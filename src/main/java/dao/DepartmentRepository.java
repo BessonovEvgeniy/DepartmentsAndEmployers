@@ -3,11 +3,11 @@ package dao;
 import model.Department;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Set;
 
 public interface DepartmentRepository extends BaseRepository <Department> {
 
-    List<Department> findAll() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
+    Set<Department> findAll() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 
     Department findById(Integer id) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException;
 

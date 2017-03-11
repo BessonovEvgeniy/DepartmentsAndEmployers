@@ -5,11 +5,9 @@ import dao.jdbc.DepartmentDao;
 import model.Department;
 import service.DepartmentService;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +24,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
         dao = new DepartmentDao();
     }
 
-    public List<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Set<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         return dao.findAll();
     }

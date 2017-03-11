@@ -2,7 +2,7 @@ package model;
 
 import lombok.Data;
 
-public @Data class BaseModel {
+public @Data abstract class BaseModel<T extends BaseModel> implements Comparable{
 
     private Integer id;
 
@@ -29,5 +29,15 @@ public @Data class BaseModel {
         int hash = 1;
         hash = hash * 31 + (id == null ? 0 : id.hashCode());
         return hash;
+    }
+
+    @Override
+    public int compareTo(Object object) {
+
+        T entry = (T) object;
+
+        int result = name.compareTo(entry.getName());
+
+        return result;
     }
 }
