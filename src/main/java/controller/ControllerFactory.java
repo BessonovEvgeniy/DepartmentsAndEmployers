@@ -21,11 +21,11 @@ public class ControllerFactory {
         controllerMap.put("/department/save", new UpsertDepartment());
         controllerMap.put("/department/delete", new DeleteDepartment());
 
-//        controllerMap.put("/employers", new AllEmployers());
-//        controllerMap.put("/employers/add", new AddEmployer());
-//        controllerMap.put("/employers/edit", new EditEmployer());
-//        controllerMap.put("/employers/save", new UpsertEmployer());
-//        controllerMap.put("/employers/delete", new DeleteEmployer());
+        controllerMap.put("/employers", new AllEmployers());
+        controllerMap.put("/employer/add", new AddEmployer());
+        controllerMap.put("/employer/edit", new EditEmployer());
+        controllerMap.put("/employer/save", new UpsertEmployer());
+        controllerMap.put("/employer/delete", new DeleteEmployer());
     }
 
     public Controller getControllerByUrl(String url) {

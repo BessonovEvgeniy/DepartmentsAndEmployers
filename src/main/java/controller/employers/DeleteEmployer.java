@@ -1,22 +1,21 @@
 package controller.employers;
 
+import controller.Controller;
 import model.Employer;
 import service.EmployerService;
 import service.impl.EmployerServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class DeleteEmployer extends HttpServlet {
+public class DeleteEmployer implements Controller {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    EmployerService employerService = new EmployerServiceImpl();
 
-        EmployerService employerService = new EmployerServiceImpl();
+    @Override
+    public void openPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
             String idStr = request.getParameter("id");
