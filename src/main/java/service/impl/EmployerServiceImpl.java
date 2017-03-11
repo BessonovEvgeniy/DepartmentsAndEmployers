@@ -5,8 +5,10 @@ import dao.jdbc.EmployerDao;
 import model.Employer;
 import service.EmployerService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,10 +34,18 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
 
     public List<Employer> getAllByDepId(Integer depId) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
+        if (depId == null){
+            return new LinkedList<Employer>();
+        }
+
         return dao.findAllByDepId(depId);
     }
 
     public Employer getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        if (id == null){
+            return new Employer();
+        }
 
         return dao.findById(id);
     }
@@ -75,6 +85,9 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
         if (employer.getEmail() == null || employer.getEmail().isEmpty()) {
             errors.put("Empty email","Enter employer email");
         }
+        if (employer.getBirthday() == null || employer.getEmail().isEmpty()){
+            errors.put("Empty birthday","Enter employer birthday");
+        }
 
         pattern = Pattern.compile(EMAIL_PATTERN);
 
@@ -88,6 +101,44 @@ public class EmployerServiceImpl extends BaseServiceImpl implements EmployerServ
         }
 
         return errors;
+    }
+
+    public Employer getEmployerFromServlet(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException{
+
+        String idStr = request.getParameter("id");
+
+        String depIdStr = request.getParameter("depId");
+
+        String name = request.getParameter("name");
+
+        String email = request.getParameter("email");
+
+        String birthdayStr = request.getParameter("birthday");
+
+        String rankStr = request.getParameter("rank");
+
+        //Prevent float values
+        if (!isInteger(rankStr)){
+            rankStr = "0";
+        }
+
+        Integer id = getIntFromString(idStr);
+
+        Employer employer = getById(id);
+
+        employer.setDepId(getIntFromString(depIdStr));
+
+        if (!birthdayStr.isEmpty()) {
+            employer.setBirthday(new java.sql.Date(parseStringToDate(birthdayStr).getTime()));
+        }
+
+        employer.setName(name);
+
+        employer.setEmail(email);
+
+        employer.setRank(getIntFromString(rankStr));
+
+        return employer;
     }
 }
 

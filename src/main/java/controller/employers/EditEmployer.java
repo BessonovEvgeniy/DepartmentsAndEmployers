@@ -1,8 +1,10 @@
 package controller.employers;
 
+import controller.Controller;
 import model.Employer;
 import service.EmployerService;
 import service.impl.EmployerServiceImpl;
+import sun.font.LayoutPathImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,45 +13,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/employer/edit")
-public class EditEmployer extends HttpServlet {
+public class EditEmployer implements Controller {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    EmployerService employerService = new EmployerServiceImpl();
 
-        EmployerService employerService = new EmployerServiceImpl();
-
+    @Override
+    public void openPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Employer employer;
 
             String idStr = request.getParameter("id");
 
-            if (idStr == null || idStr.isEmpty()) {
+            String depIdStr = request.getParameter("depId");
 
-                employer = new Employer();
-                
-                String depIdStr = request.getParameter("depId");
+            Integer id = employerService.getIntFromString(idStr);
 
-                employer.setDepId(employerService.getIntFromString(depIdStr));
+            Employer employer = employerService.getById(id);
 
-                request.setAttribute("employer", employer);
+            if (depIdStr!=null && !depIdStr.isEmpty()){
 
-                request.getRequestDispatcher("/WEB-INF/pages/employers/edit.jsp").forward(request, response);
+                Integer depId = employerService.getIntFromString(depIdStr);
+
+                employer.setDepId(depId);
             }
-            else {
 
-                Integer id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("employer", employer);
 
-                employer = employerService.getById(id);
-
-                request.setAttribute("employer", employer);
-
-                request.getRequestDispatcher("/WEB-INF/pages/employers/edit.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("/WEB-INF/pages/employers/edit.jsp").forward(request, response);
         }
         catch (Exception e){
             e.printStackTrace();
         }
+
     }
 }
 

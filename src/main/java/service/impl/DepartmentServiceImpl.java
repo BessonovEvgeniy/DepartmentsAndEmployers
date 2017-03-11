@@ -33,6 +33,9 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
 
     public Department getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
+        if (id == null) {
+            return new Department();
+        }
         return dao.findById(id);
     }
 

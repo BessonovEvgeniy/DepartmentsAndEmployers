@@ -17,14 +17,14 @@ public abstract class BaseServiceImpl<T extends BaseModel, P extends BaseReposit
         this.dao = dao;
     }
 
-    public Integer getIntFromString(String idStr) throws ParseException {
+    public Integer getIntFromString(String idStr){
 
         Integer id = null;
 
-        if (idStr != null && !idStr.isEmpty()) {
-
+        try {
             id = Integer.parseInt(idStr);
         }
+        catch (Exception e){ }
 
         return id;
     }

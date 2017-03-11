@@ -29,9 +29,17 @@ public class EmployerDao extends BaseDao implements EmployerRepository {
 
             try (Statement statement = connection.createStatement()){
 
+                Employer employer = new Employer();
+
                 String query = "SELECT * FROM employers WHERE id=" + id;
 
-                return createEmployer(statement.executeQuery(query));
+                ResultSet resultSet = statement.executeQuery(query);
+
+                if (resultSet.next()){
+                    employer = createEmployer(resultSet);
+                }
+
+                return employer;
             }
         }
 
