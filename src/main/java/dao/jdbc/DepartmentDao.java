@@ -20,7 +20,9 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
 
                 String query = "SELECT * FROM departments";
 
-                return createListDepartment(statement.executeQuery(query));
+                ResultSet resultSet = statement.executeQuery(query);
+
+                return createListDepartment(resultSet);
             }
         }
     }
@@ -33,7 +35,13 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
 
                 String query = "SELECT * FROM departments WHERE id=" + id;
 
-                return createDepartment(statement.executeQuery(query));
+                ResultSet resultSet = statement.executeQuery(query);
+
+                if (resultSet.next()) {
+                    return createDepartment(resultSet);
+                }
+
+                return new Department();
             }
         }
     }
@@ -115,7 +123,7 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
 
         List<Department> departmentList = new LinkedList<>();
 
-        if(resultSet.next()) {
+        while(resultSet.next()) {
 
             departmentList.add(createDepartment(resultSet));
         }

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/employers")
 public class AllEmployers extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

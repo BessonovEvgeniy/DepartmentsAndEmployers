@@ -16,12 +16,12 @@ public class ControllerFactory {
         controllerMap.put("/", new Home());
 
         controllerMap.put("/departments", new AllDepartments());
-        controllerMap.put("/departments/add", new AddDepartment());
-//        controllerMap.put("/departments/edit", new EditDepartment());
-//        controllerMap.put("/departments/save", new UpsertDepartment());
-//        controllerMap.put("/departments/delete", new DeleteDepartment());
+        controllerMap.put("/department/add", new AddDepartment());
+        controllerMap.put("/department/edit", new EditDepartment());
+        controllerMap.put("/department/save", new UpsertDepartment());
+        controllerMap.put("/department/delete", new DeleteDepartment());
 
-//        controllerMap.put("/employers", new AllEmployer());
+//        controllerMap.put("/employers", new AllEmployers());
 //        controllerMap.put("/employers/add", new AddEmployer());
 //        controllerMap.put("/employers/edit", new EditEmployer());
 //        controllerMap.put("/employers/save", new UpsertEmployer());
@@ -30,7 +30,6 @@ public class ControllerFactory {
 
     public Controller getControllerByUrl(String url) {
 
-        System.out.println(url);
         return controllerMap.get(url);
     }
 

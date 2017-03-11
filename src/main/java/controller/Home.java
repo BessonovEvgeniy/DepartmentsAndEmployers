@@ -9,6 +9,6 @@ public class Home implements Controller{
 
     @Override
     public void openPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("../webapp/index.jsp").forward(request,response);
+        request.getRequestDispatcher("").forward(request,response);
     }
 }

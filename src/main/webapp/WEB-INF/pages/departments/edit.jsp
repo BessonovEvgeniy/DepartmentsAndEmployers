@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="panel-body">
-    <form method="post" id="form" action="/departments/save">
+    <form method="post" id="form" action="/department/save">
         <fieldset class="form-group">
             <div class="row padding-bot">
                 <div class="col-sm-1"></div>

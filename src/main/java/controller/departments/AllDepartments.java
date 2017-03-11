@@ -19,9 +19,7 @@ public class AllDepartments implements Controller {
     public void openPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
 
-            List<Department> departmentList = departmentService.getAll();
-
-            request.setAttribute("departments", departmentList);
+            request.setAttribute("departments", departmentService.getAll());
 
             request.getRequestDispatcher("/WEB-INF/pages/departments/all.jsp").forward(request, response);
         }

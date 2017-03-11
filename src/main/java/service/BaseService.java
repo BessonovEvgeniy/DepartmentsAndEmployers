@@ -5,7 +5,7 @@ import java.util.Date;
 
 public interface BaseService {
 
-    Integer getIntFromString(String idStr) throws ParseException;
+    Integer getIntFromString(String idStr);
 
     Date parseStringToDate(String dateStr) throws ParseException;
 

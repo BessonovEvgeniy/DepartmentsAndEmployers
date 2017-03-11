@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/employer/save")
 public class UpsertEmployer extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

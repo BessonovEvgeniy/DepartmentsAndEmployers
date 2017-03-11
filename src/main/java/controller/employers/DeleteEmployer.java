@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/employer/delete")
 public class DeleteEmployer extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
