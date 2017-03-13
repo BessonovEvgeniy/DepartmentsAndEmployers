@@ -1,8 +1,9 @@
 package model;
 
 import lombok.Data;
+import service.impl.sorting.Sort;
 
-public @Data class BaseModel {
+public @Data abstract class BaseModel<T extends BaseModel> implements Comparable<T>{
 
     private Integer id;
 
@@ -29,5 +30,11 @@ public @Data class BaseModel {
         int hash = 1;
         hash = hash * 31 + (id == null ? 0 : id.hashCode());
         return hash;
+    }
+
+    @Override
+    public int compareTo(T object) {
+
+        return name.compareTo(object.getName());
     }
 }

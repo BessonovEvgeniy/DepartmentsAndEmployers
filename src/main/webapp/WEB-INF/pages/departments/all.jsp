@@ -45,6 +45,8 @@
     </tbody>
 </table>
 <a class="btn btn-info" role="button" href="/department/edit">Add Department</a>
+<a class="btn btn-info" role="button" href="/departments?sortBy=nameAsc">Sort by Asc with Comparator</a>
+<a class="btn btn-info" role="button" href="/departments?sortBy=nameDsc">Sort by Dsc with Comparator</a>
 </div>
 </body>
 </html>
