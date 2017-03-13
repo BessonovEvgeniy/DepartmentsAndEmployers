@@ -3,12 +3,12 @@ package service;
 import model.Department;
 
 import java.sql.SQLException;
-import java.util.Set;
+import java.util.List;
 import java.util.Map;
 
 public interface DepartmentService extends BaseService {
 
-    Set<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    List<Department> getAll() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     Department getById(Integer id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 

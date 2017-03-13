@@ -1,8 +1,9 @@
 package model;
 
 import lombok.Data;
+import service.impl.sorting.Sort;
 
-public @Data abstract class BaseModel<T extends BaseModel> implements Comparable{
+public @Data abstract class BaseModel<T extends BaseModel> implements Comparable<T>{
 
     private Integer id;
 
@@ -32,12 +33,8 @@ public @Data abstract class BaseModel<T extends BaseModel> implements Comparable
     }
 
     @Override
-    public int compareTo(Object object) {
+    public int compareTo(T object) {
 
-        T entry = (T) object;
-
-        int result = name.compareTo(entry.getName());
-
-        return result;
+        return name.compareTo(object.getName());
     }
 }

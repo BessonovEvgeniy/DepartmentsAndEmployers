@@ -7,11 +7,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class DepartmentDao extends BaseDao implements DepartmentRepository {
 
-    public Set<Department> findAll() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public List<Department> findAll() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
         try (Connection connection = executeQuery.getConnection()) {
 
@@ -118,9 +121,9 @@ public class DepartmentDao extends BaseDao implements DepartmentRepository {
         return department;
     }
 
-    private Set<Department> createListDepartment(ResultSet resultSet) throws SQLException{
+    private List<Department> createListDepartment(ResultSet resultSet) throws SQLException{
 
-        Set<Department> departmentList = new TreeSet<>();
+        List<Department> departmentList = new LinkedList<>();
 
         while(resultSet.next()) {
 
